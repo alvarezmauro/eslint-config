@@ -1,2 +1,2 @@
-# eslint-config-alvarezmauro
+# @alvarezmauro/eslint-config
 Eslint and Prettier shareable config
