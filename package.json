@@ -1,0 +1,28 @@
+{
+  "name": "@alvarezmauro/eslint-config",
+  "version": "1.0.0",
+  "description": "Eslint and Prettier shareable config",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvarezmauro/eslint-config.git"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-config",
+    "lint",
+    "config",
+    "javascript",
+    "typescript",
+    "prettier"
+  ],
+  "author": "Mauro Alvarez (contact@mauroalvarez.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alvarezmauro/eslint-config/issues"
+  },
+  "homepage": "https://github.com/alvarezmauro/eslint-config#readme"
+}
