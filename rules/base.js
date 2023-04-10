@@ -33,4 +33,12 @@ module.exports = {
     ],
     "consistent-return": "off",
     "max-nested-callbacks": ["error", 3],
+    quotes: [
+        "error",
+        "single",
+        {
+            avoidEscape: true,
+            allowTemplateLiterals: true,
+        },
+    ],
 };
