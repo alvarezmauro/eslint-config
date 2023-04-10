@@ -1,16 +1,5 @@
 module.exports = {
-    "import/no-extraneous-dependencies": [
-        "error",
-        {
-            devDependencies: false,
-            optionalDependencies: false,
-            peerDependencies: false,
-        },
-    ],
     "import/prefer-default-export": "off",
-    "import/first": "error",
-    "import/newline-after-import": "error",
-    "import/no-duplicates": "error",
     "simple-import-sort/imports": [
         "error",
         {
@@ -33,18 +22,7 @@ module.exports = {
         },
     ],
     "simple-import-sort/exports": "error",
-    "no-console": "warn",
     "no-underscore-dangle": "off",
-    "no-alert": "warn",
-    "no-await-in-loop": "error",
-    "no-return-assign": ["error", "except-parens"],
-    "prefer-const": [
-        "error",
-        {
-            destructuring: "any",
-        },
-    ],
-    "arrow-body-style": ["error", "as-needed"],
     "no-unused-expressions": [
         "error",
         {
@@ -54,4 +32,5 @@ module.exports = {
         },
     ],
     "consistent-return": "off",
+    "max-nested-callbacks": ["error", 3],
 };
