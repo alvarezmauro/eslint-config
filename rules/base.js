@@ -1,4 +1,5 @@
 module.exports = {
+    "import/extensions": "off",
     "import/prefer-default-export": "off",
     "simple-import-sort/imports": [
         "error",
