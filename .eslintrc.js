@@ -1,4 +1,6 @@
 require("@rushstack/eslint-patch/modern-module-resolution");
+const base = require("./rules/base");
+const prettier = require("./rules/prettier");
 
 module.exports = {
     extends: ["airbnb-base", "prettier"],
@@ -13,6 +15,9 @@ module.exports = {
         ecmaVersion: 13,
         sourceType: "module",
     },
-    rules: {},
     plugins: ["html", "prettier"],
+    rules: {
+        base,
+        prettier,
+    },
 };
