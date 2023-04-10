@@ -22,6 +22,7 @@ module.exports = {
             ],
         },
     ],
+    "react/prop-types": "off",
     "react/forbid-prop-types": "off",
     "react/no-unescaped-entities": "off",
     "react/function-component-definition": "off",
