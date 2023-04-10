@@ -11,7 +11,11 @@ module.exports = {
         node: true,
         jest: true,
     },
-    plugins: ["html", "prettier"],
+    parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+    },
+    plugins: ["html", "prettier", "import", "simple-import-sort"],
     rules: {
         base,
         prettier,
