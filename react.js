@@ -1,5 +1,6 @@
 require("@rushstack/eslint-patch/modern-module-resolution");
 const base = require("./rules/base.js");
+const prettier = require("./rules/prettier");
 const react = require("./rules/react.js");
 
 module.exports = {
@@ -12,27 +13,16 @@ module.exports = {
         jest: true,
     },
     parserOptions: {
-        ecmaVersion: 2021,
+        ecmaVersion: "latest",
         sourceType: "module",
         ecmaFeatures: {
             jsx: true,
         },
     },
-    plugins: ["simple-import-sort", "import", "tailwindcss"],
+    plugins: ["html", "prettier", "import", "simple-import-sort"],
     rules: {
         ...base,
+        ...prettier,
         ...react,
-    },
-    settings: {
-        react: {
-            // Tells eslint-plugin-react to automatically detect the version of React to use
-            version: "detect",
-        },
-        "import/resolver": {
-            alias: {
-                map: [["src", "./src"]],
-                extensions: [".js", ".jsx"],
-            },
-        },
     },
 };
