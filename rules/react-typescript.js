@@ -5,10 +5,4 @@ module.exports = {
             extensions: [".js", ".jsx", ".ts", ".tsx", ".mdx"],
         },
     ],
-    "@typescript-eslint/consistent-type-imports": [
-        "error",
-        {
-            prefer: "type-imports",
-        },
-    ],
 };
