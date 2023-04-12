@@ -1,0 +1,21 @@
+{
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts"],
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "strict": true,
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "skipLibCheck": true,
+        "jsx": "react",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "typeRoots": ["./node_modules/@types", "./src/@types"]
+    }
+}
