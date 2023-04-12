@@ -1,8 +1,8 @@
 module.exports = {
-    "react/jsx-filename-extension": [
+    'react/jsx-filename-extension': [
         1,
         {
-            extensions: [".js", ".jsx", ".ts", ".tsx", ".mdx"],
+            extensions: ['.js', '.jsx', '.ts', '.tsx', '.mdx'],
         },
     ],
 };
