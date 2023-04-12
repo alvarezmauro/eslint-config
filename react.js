@@ -1,10 +1,8 @@
-require("@rushstack/eslint-patch/modern-module-resolution");
-const base = require("./rules/base.js");
-const prettier = require("./rules/prettier");
-const react = require("./rules/react.js");
+const base = require('./rules/base.js');
+const react = require('./rules/react.js');
 
 module.exports = {
-    extends: ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
+    extends: ['airbnb', 'airbnb/hooks', 'prettier', 'prettier/react'],
     env: {
         browser: true,
         commonjs: true,
@@ -13,16 +11,15 @@ module.exports = {
         jest: true,
     },
     parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
+        ecmaVersion: 'latest',
+        sourceType: 'module',
         ecmaFeatures: {
             jsx: true,
         },
     },
-    plugins: ["html", "prettier", "import", "simple-import-sort"],
+    plugins: ['html', 'import', 'simple-import-sort'],
     rules: {
         ...base,
-        ...prettier,
         ...react,
     },
 };
