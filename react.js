@@ -10,11 +10,11 @@ module.exports = {
         node: true,
         jest: true,
     },
+    parser: '@babel/eslint-parser',
     parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true,
+        requireConfigFile: false,
+        babelOptions: {
+            presets: ['@babel/preset-react'],
         },
     },
     plugins: ['html', 'import', 'simple-import-sort'],

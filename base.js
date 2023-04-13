@@ -9,9 +9,21 @@ module.exports = {
         node: true,
         jest: true,
     },
+    parser: '@babel/eslint-parser',
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        ecmaFeatures: {
+            globalReturn: false,
+            impliedStrict: true,
+        },
+        requireConfigFile: false,
+        allowImportExportEverywhere: false,
+        babelOptions: {
+            babelrc: false,
+            configFile: false,
+            presets: ['@babel/preset-env'],
+        },
     },
     plugins: ['html', 'import', 'simple-import-sort'],
     rules: {
