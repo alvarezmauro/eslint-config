@@ -4,11 +4,13 @@ const prettierConfig = require('../.prettierrc.js');
 
 function updatePrettierConfig() {
     let prettierConfigExists = false;
-    const prettierConfigPath = `${process.cwd()}/.prettierrc`;
+    const projectPrettierConfigPath = `${process.cwd()}/.prettierrc`;
     let projectPrettierConfig = {};
 
     try {
-        projectPrettierConfig = JSON.parse(fs.readFileSync(prettierConfigPath));
+        projectPrettierConfig = JSON.parse(
+            fs.readFileSync(projectPrettierConfigPath),
+        );
         prettierConfigExists = true;
     } catch (err) {
         console.log(`.prettierrc file not found`);
@@ -20,7 +22,7 @@ function updatePrettierConfig() {
     };
 
     fs.writeFileSync(
-        prettierConfigPath,
+        projectPrettierConfigPath,
         JSON.stringify(mergedPrettierConfig, null, 4),
     );
 
