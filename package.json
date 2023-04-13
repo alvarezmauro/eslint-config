@@ -74,7 +74,9 @@
             "./.eslintrc.js"
         ]
     },
-    "dependencies": {
-        "fs": "^0.0.1-security"
+    "devDependencies": {
+        "fs": "^0.0.1-security",
+        "inquirer": "^8.2.5",
+        "shelljs": "^0.8.5"
     }
 }
