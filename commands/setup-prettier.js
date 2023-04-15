@@ -50,8 +50,6 @@ function setupPrettier(option) {
             JSON.stringify(PRETTIER_CONFIG, null, 4),
         );
     }
-
-    console.log(`${prettierConfigExists ? 'Updated' : 'Created'} .prettierrc`);
 }
 
 module.exports = setupPrettier;
