@@ -3,26 +3,28 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const shell = require('shelljs');
 const PrettyConsole = require('../lib/prettyConsole');
+const setupPrettier = require('./setup-prettier');
+const setupTypescript = require('./setup-typescript');
 
 const prettyConsole = new PrettyConsole();
 prettyConsole.clear();
 prettyConsole.closeByNewLine = true;
 prettyConsole.useIcons = true;
 
+const PROJECT_PRETTIER_CONFIG_PATH = `${process.cwd()}/.prettierrc`;
 const PROJECT_TS_CONFIG_PATH = `${process.cwd()}/tsconfig.json`;
 const PROJECT_ESLINT_CONFIG_PATH = `${process.cwd()}/eslintrc.js`;
-const PROJECT_PRETTIER_CONFIG_PATH = `${process.cwd()}/.prettierrc`;
 
-function getTsConfigChoices() {
-    let hasTsConfig;
+function getTypeScriptConfigChoices() {
+    let tsConfigExists;
     try {
         fs.readFileSync(PROJECT_TS_CONFIG_PATH);
-        hasTsConfig = true;
+        tsConfigExists = true;
     } catch (err) {
-        hasTsConfig = false;
+        tsConfigExists = false;
     }
 
-    if (hasTsConfig) {
+    if (tsConfigExists) {
         return [
             {
                 name: 'Override tsconfig.json',
@@ -51,16 +53,16 @@ function getTsConfigChoices() {
     ];
 }
 
-function getPrettyConfigChoices() {
-    let hasPrettyConfig;
+function getPrettierConfigChoices() {
+    let prettierConfigExists;
     try {
         fs.readFileSync(PROJECT_PRETTIER_CONFIG_PATH);
-        hasPrettyConfig = true;
+        prettierConfigExists = true;
     } catch (err) {
-        hasPrettyConfig = false;
+        prettierConfigExists = false;
     }
 
-    if (hasPrettyConfig) {
+    if (prettierConfigExists) {
         return [
             {
                 name: 'Override .prettierrc',
@@ -130,9 +132,9 @@ function getEsLintChoices() {
 async function selectOptions() {
     const selectOptions = {
         projectType: '',
-        tsConfig: '',
+        typeScript: '',
         esLint: '',
-        prettyConfig: '',
+        prettier: '',
     };
 
     prettyConsole.clear();
@@ -162,40 +164,45 @@ async function selectOptions() {
     );
     prettyConsole.print('blue', '', '----------------------------------------');
 
-    const { setupPrettier } = await inquirer.prompt([
+    // Prettier config
+    const { prettierSelectedOption } = await inquirer.prompt([
         {
             type: 'list',
-            name: 'setupPrettier',
+            name: 'prettierSelectedOption',
             message: 'What do you want to do with .prettierrc?',
-            choices: getPrettyConfigChoices(),
+            choices: getPrettierConfigChoices(),
         },
     ]);
-    selectOptions.prettyConfig = setupPrettier;
+    selectOptions.prettier = prettierSelectedOption;
 
+    // Typescript config
     if (projectType === 'js-ts' || projectType === 'react-ts') {
-        const { setupTsConfig } = await inquirer.prompt([
+        const { typeScriptSelectedOption } = await inquirer.prompt([
             {
                 type: 'list',
-                name: 'setupTsConfig',
+                name: 'typeScriptSelectedOption',
                 message: 'What do you want to do with tsconfig.json?',
-                choices: getTsConfigChoices(),
+                choices: getTypeScriptConfigChoices(),
             },
         ]);
-        selectOptions.tsConfig = setupTsConfig;
+        selectOptions.typeScript = typeScriptSelectedOption;
     }
 
-    const { setupEsLint } = await inquirer.prompt([
+    // ESLint config
+    const { esLintSelectedOption } = await inquirer.prompt([
         {
             type: 'list',
-            name: 'setupEsLint',
+            name: 'esLintSelectedOption',
             message: 'What do you want to do with eslintrc.js?',
             choices: getEsLintChoices(),
         },
     ]);
-    selectOptions.esLint = setupEsLint;
+    selectOptions.esLint = esLintSelectedOption;
 
-    console.log(selectOptions);
-    return selectOptions;
+    setupPrettier(selectOptions.prettier);
+    if (selectOptions.typeScript) {
+        setupTypescript(selectOptions.typeScript);
+    }
 }
 
 const result = selectOptions();
