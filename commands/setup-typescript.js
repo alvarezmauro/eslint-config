@@ -15,8 +15,6 @@ function updateTsconfig(option) {
     prettyConsole.closeByNewLine = true;
     prettyConsole.useIcons = true;
 
-    prettyConsole.info('Setting up TypeScript');
-
     let tsConfigExists = false;
     let projectTsConfig = {};
 

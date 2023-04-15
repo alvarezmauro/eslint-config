@@ -16,8 +16,6 @@ function setupPrettier(option) {
     prettyConsole.closeByNewLine = true;
     prettyConsole.useIcons = true;
 
-    prettyConsole.info('Setting up prettier configuration');
-
     let prettierConfigExists = false;
     let projectPrettierConfig = {};
 
