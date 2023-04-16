@@ -4,7 +4,7 @@
     "description": "Eslint and Prettier shareable config",
     "main": "index.js",
     "scripts": {
-        "setup": "node ./commands/setup.js"
+        "setup": "node ./scripts/setup.js"
     },
     "repository": {
         "type": "git",
