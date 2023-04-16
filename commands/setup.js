@@ -5,6 +5,7 @@ const shell = require('shelljs');
 const PrettyConsole = require('../lib/prettyConsole');
 const setupPrettier = require('./setup-prettier');
 const setupTypescript = require('./setup-typescript');
+const setupEslint = require('./setup-eslint');
 
 const prettyConsole = new PrettyConsole();
 prettyConsole.clear();
@@ -13,7 +14,7 @@ prettyConsole.useIcons = true;
 
 const PROJECT_PRETTIER_CONFIG_PATH = `${process.cwd()}/.prettierrc`;
 const PROJECT_TS_CONFIG_PATH = `${process.cwd()}/tsconfig.json`;
-const PROJECT_ESLINT_CONFIG_PATH = `${process.cwd()}/eslintrc.js`;
+const PROJECT_ESLINT_CONFIG_PATH = `${process.cwd()}/.eslintrc`;
 
 function getTypeScriptConfigChoices() {
     let tsConfigExists;
@@ -203,6 +204,7 @@ async function selectOptions() {
     if (selectOptions.typeScript) {
         setupTypescript(selectOptions.typeScript);
     }
+    setupEslint(selectOptions.esLint, selectOptions.projectType);
 }
 
 const result = selectOptions();
