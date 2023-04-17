@@ -1,6 +1,6 @@
 {
     "name": "@alvarezmauro/eslint-config",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Eslint and Prettier shareable config",
     "main": "index.js",
     "scripts": {
@@ -44,7 +44,10 @@
         "eslint-plugin-react": "^7.32.2",
         "eslint-plugin-react-hooks": "^4.6.0",
         "prettier": "^2.8.7",
-        "typescript": "^5.x"
+        "typescript": "^5.x",
+        "fs": "^0.0.1-security",
+        "inquirer": "^8.2.5",
+        "shelljs": "^0.8.5"
     },
     "peerDependenciesMeta": {
         "@babel/eslint-parser": {
@@ -73,10 +76,5 @@
         "extends": [
             "./.eslintrc.js"
         ]
-    },
-    "devDependencies": {
-        "fs": "^0.0.1-security",
-        "inquirer": "^8.2.5",
-        "shelljs": "^0.8.5"
     }
 }
