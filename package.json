@@ -39,17 +39,18 @@
         "inquirer": "^8.2.5",
         "prettier": "^2.8.7",
         "shelljs": "^0.8.5",
-        "typescript": "^5.0.4"
+        "typescript": "^5.0.4",
+        "semver": "^7.5.0"
     },
     "devDependencies": {
-        "eslint-config-airbnb-base": "^15.0.0",
         "@babel/eslint-parser": "^7.21.3",
         "@babel/preset-env": "^7.21.4",
-        "eslint-config-airbnb-typescript": "^17.0.0",
+        "@babel/preset-react": "^7.18.6",
         "@typescript-eslint/eslint-plugin": "^5.58.0",
         "@typescript-eslint/parser": "^5.58.0",
         "eslint-config-airbnb": "^19.0.4",
-        "@babel/preset-react": "^10.0.1",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-airbnb-typescript": "^17.0.0",
         "eslint-plugin-react": "^7.32.2",
         "eslint-plugin-react-hooks": "^4.6.0"
     },

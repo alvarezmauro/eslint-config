@@ -6,6 +6,7 @@ const PrettyConsole = require('../lib/prettyConsole');
 const setupPrettier = require('./setup-prettier');
 const setupTypescript = require('./setup-typescript');
 const setupEslint = require('./setup-eslint');
+const installDeps = require('./install-deps');
 
 const prettyConsole = new PrettyConsole();
 prettyConsole.clear();
@@ -205,6 +206,8 @@ async function selectOptions() {
         setupTypescript(selectOptions.typeScript);
     }
     setupEslint(selectOptions.esLint, selectOptions.projectType);
+
+    installDeps(selectOptions.projectType);
 }
 
 const result = selectOptions();
