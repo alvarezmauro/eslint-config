@@ -30,19 +30,19 @@ function setupEslint(option, projectType) {
     switch (projectType) {
         case 'js':
             CONFIG = BASE_ESLINT_CONFIG;
-            EXTENDS = '@alvarezmauro/base';
+            EXTENDS = '@alvarezmauro/eslint-config';
             break;
         case 'react':
             CONFIG = REACT_ESLINT_CONFIG;
-            EXTENDS = '@alvarezmauro/react';
+            EXTENDS = '@alvarezmauro/eslint-config/react';
             break;
         case 'js-ts':
             CONFIG = TYPESCRIPT_ESLINT_CONFIG;
-            EXTENDS = '@alvarezmauro/typescript';
+            EXTENDS = '@alvarezmauro/eslint-config/typescript';
             break;
         case 'react-ts':
             CONFIG = REACT_TYPESCRIPT_ESLINT_CONFIG;
-            EXTENDS = '@alvarezmauro/react-typescript';
+            EXTENDS = '@alvarezmauro/eslint-config/react-typescript';
             break;
         default:
             break;
