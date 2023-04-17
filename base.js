@@ -27,6 +27,6 @@ module.exports = {
     },
     plugins: ['html', 'import', 'simple-import-sort'],
     rules: {
-        base,
+        ...base,
     },
 };
