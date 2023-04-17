@@ -1,6 +1,6 @@
 {
     "name": "@alvarezmauro/eslint-config",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "Eslint and Prettier shareable config",
     "main": "index.js",
     "scripts": {
@@ -29,50 +29,29 @@
     "homepage": "https://github.com/alvarezmauro/eslint-config#readme",
     "peerDependencies": {
         "@babel/core": "^7.21.4",
-        "@babel/eslint-parser": "7.x",
-        "@babel/preset-env": "7.x",
-        "@babel/preset-react": "7.x",
-        "@typescript-eslint/eslint-plugin": "^5.58.0",
-        "@typescript-eslint/parser": "^5.58.0",
         "eslint": "^8.38.0",
-        "eslint-config-airbnb": "^19.0.4",
-        "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-prettier": "^8.8.0",
-        "eslint-config-airbnb-typescript": "^17.0.0",
         "eslint-plugin-html": "^7.1.0",
         "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-jsx-a11y": "^6.7.1",
-        "eslint-plugin-react": "^7.32.2",
-        "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-simple-import-sort": "^10.0.0",
         "fs": "^0.0.1-security",
         "inquirer": "^8.2.5",
         "prettier": "^2.8.7",
         "shelljs": "^0.8.5",
-        "typescript": "^5.x"
+        "typescript": "^5.0.4"
     },
-    "peerDependenciesMeta": {
-        "@babel/eslint-parser": {
-            "optional": true
-        },
-        "@babel/preset-react": {
-            "optional": true
-        },
-        "@babel/preset-env": {
-            "optional": true
-        },
-        "@typescript-eslint/eslint-plugin": {
-            "optional": true
-        },
-        "@typescript-eslint/parser": {
-            "optional": true
-        },
-        "eslint-plugin-react": {
-            "optional": true
-        },
-        "typescript": {
-            "optional": true
-        }
+    "devDependencies": {
+        "eslint-config-airbnb-base": "^15.0.0",
+        "@babel/eslint-parser": "^7.21.3",
+        "@babel/preset-env": "^7.21.4",
+        "eslint-config-airbnb-typescript": "^17.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.58.0",
+        "@typescript-eslint/parser": "^5.58.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "@babel/preset-react": "^10.0.1",
+        "eslint-plugin-react": "^7.32.2",
+        "eslint-plugin-react-hooks": "^4.6.0"
     },
     "eslintConfig": {
         "extends": [
