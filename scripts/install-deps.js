@@ -4,9 +4,9 @@ const PrettyConsole = require('../lib/prettyConsole');
 
 const REQUIRED_PACKAGES = {
     ['js']: [
-        { name: 'eslint-config-airbnb-base', version: '^15.x' },
-        { name: '@babel/eslint-parser', version: '^7.x' },
-        { name: '@babel/preset-env', version: '^7.x' },
+        { name: 'eslint-config-airbnb-base', version: '^15.0.0' },
+        { name: '@babel/eslint-parser', version: '^7.21.3' },
+        { name: '@babel/preset-env', version: '^7.21.4' },
     ],
     ['js-ts']: [
         { name: 'eslint-config-airbnb-base', version: '^15.0.0' },
