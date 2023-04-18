@@ -55,7 +55,7 @@ function setupEslint(option, projectType) {
             JSON.stringify(ESLINT_CONFIG, null, 4),
         );
     } else if (option === 'merge') {
-        const extendsValue = [];
+        let extendsValue = [];
         try {
             projectEslintConfig = JSON.parse(
                 fs.readFileSync(PROJECT_ESLINT_CONFIG_PATH),
@@ -67,8 +67,9 @@ function setupEslint(option, projectType) {
         }
 
         if (eslintConfigExists) {
+            const extendsToFilter = [...CONFIG.extends, EXTENDS];
             extendsValue = projectEslintConfig.extends.filter((value) => {
-                return CONFIG.extends.indexOf(value) === -1;
+                return extendsToFilter.indexOf(value) === -1;
             });
         }
 
