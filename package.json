@@ -1,6 +1,6 @@
 {
     "name": "@alvarezmauro/eslint-config",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "Eslint and Prettier shareable config",
     "main": "index.js",
     "scripts": {
@@ -39,7 +39,6 @@
         "inquirer": "^8.2.5",
         "prettier": "^2.8.7",
         "shelljs": "^0.8.5",
-        "typescript": "^5.0.4",
         "semver": "^7.5.0"
     },
     "devDependencies": {
@@ -52,7 +51,8 @@
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-airbnb-typescript": "^17.0.0",
         "eslint-plugin-react": "^7.32.2",
-        "eslint-plugin-react-hooks": "^4.6.0"
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "typescript": "^5.0.4"
     },
     "eslintConfig": {
         "extends": [

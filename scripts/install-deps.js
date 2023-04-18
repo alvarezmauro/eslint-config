@@ -4,9 +4,9 @@ const PrettyConsole = require('../lib/prettyConsole');
 
 const REQUIRED_PACKAGES = {
     ['js']: [
-        { name: 'eslint-config-airbnb-base', version: '^15.0.0' },
-        { name: '@babel/eslint-parser', version: '^7.21.3' },
-        { name: '@babel/preset-env', version: '^7.21.4' },
+        { name: 'eslint-config-airbnb-base', version: '^15.x' },
+        { name: '@babel/eslint-parser', version: '^7.x' },
+        { name: '@babel/preset-env', version: '^7.x' },
     ],
     ['js-ts']: [
         { name: 'eslint-config-airbnb-base', version: '^15.0.0' },
@@ -35,10 +35,11 @@ function installDeps(projectType) {
     const prettyConsole = new PrettyConsole();
     prettyConsole.closeByNewLine = true;
     prettyConsole.useIcons = true;
+    let dependencyError = false;
+    const packagesToInstall = [];
 
+    prettyConsole.print('blue', '', 'Checking dependencies...');
     REQUIRED_PACKAGES[projectType].forEach((package) => {
-        prettyConsole.info('Installing necessary dependencies...');
-
         try {
             // Check if the required package is already installed
             require.resolve(package.name);
@@ -46,28 +47,44 @@ function installDeps(projectType) {
             const packageJson = require(`${process.cwd()}/package.json`);
             const installedVersion = packageJson.devDependencies[package.name];
 
+            if (installedVersion && installedVersion.startsWith('^')) {
+                // Remove the ^ character from the installed version
+                installedVersion = installedVersion.substring(1);
+            }
+
             if (
                 !installedVersion ||
                 !semver.satisfies(installedVersion, package.version)
             ) {
                 // The installed version is incompatible, so log an error
                 prettyConsole.error(
-                    `Error: The installed version of ${package.name} (${installedVersion}) is not compatible with ${package.version}`,
+                    `The installed version of ${package.name} (${installedVersion}) is not compatible with ${package.version}, please update it manually.`,
                 );
+                dependencyError = true;
             }
         } catch (error) {
-            // The package is not installed, so install it as a devDependency
-            prettyConsole.info(
-                `Installing ${package.name}@${package.version}...`,
-            );
-            execSync(
-                `npm install --save-dev ${package.name}@${package.version}`,
-                {
-                    stdio: 'inherit',
-                },
-            );
+            packagesToInstall.push(package);
         }
     });
+
+    if (packagesToInstall.length > 0 && !dependencyError) {
+        prettyConsole.print('blue', '', 'Installing necessary dependencies...');
+
+        const packages = packagesToInstall
+            .map((package) => `${package.name}@${package.version}`)
+            .join(' ');
+
+        try {
+            execSync(`npm install --save-dev ${packages}`, {
+                stdio: 'ignore',
+            });
+        } catch (error) {
+            prettyConsole.error(
+                'There was an error installing the dependencies, please install them manually.',
+            );
+            dependencyError = true;
+        }
+    }
 }
 
 module.exports = installDeps;
