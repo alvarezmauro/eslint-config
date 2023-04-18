@@ -140,6 +140,23 @@ async function selectOptions() {
     };
 
     prettyConsole.clear();
+    prettyConsole.print('blue', '', '----------------------------------------');
+    prettyConsole.info(
+        'This package includes a recommended configuration for Prettier, TypeScript and',
+        'ESLint based on the type of project your are planning to work on.',
+        'It also includes a recommended set of dependencies to install.',
+        '',
+        'Answer the following questions to setup/update your ESLint and Prettier preferences.',
+        '',
+        'Have in mind that:',
+        '- If you do not have any configuration files, we will create them for you.',
+        '- If you have existing configuration files, we will ask you if you want to override',
+        '  them or merge them with our recommended configuration.',
+        '- If you want to keep your existing configuration files, you can save our recommended',
+        '  configuration in a separate file.',
+    );
+    prettyConsole.print('blue', '', '----------------------------------------');
+
     const { projectType } = await inquirer.prompt([
         {
             type: 'list',
@@ -154,17 +171,6 @@ async function selectOptions() {
         },
     ]);
     selectOptions.projectType = projectType;
-
-    console.log('\n');
-    prettyConsole.print('blue', '', '----------------------------------------');
-    prettyConsole.info(
-        'This package includes a recommended configuration for Prettier, TypeScript and ESLint.',
-        'We will now ask you what you want to do with your existing configuration files.',
-        '- If you do not have any configuration files, we will create them for you.',
-        '- If you have existing configuration files, we will ask you if you want to override them or merge them with our recommended configuration.',
-        '- If you want to keep your existing configuration files, you can save our recommended configuration in a separate file.',
-    );
-    prettyConsole.print('blue', '', '----------------------------------------');
 
     // Prettier config
     const { prettierSelectedOption } = await inquirer.prompt([

@@ -33,7 +33,7 @@ const REQUIRED_PACKAGES = {
 
 function installDeps(projectType) {
     const prettyConsole = new PrettyConsole();
-    prettyConsole.closeByNewLine = true;
+    prettyConsole.closeByNewLine = false;
     prettyConsole.useIcons = true;
     let dependencyError = false;
     const packagesToInstall = [];
@@ -68,7 +68,18 @@ function installDeps(projectType) {
     });
 
     if (packagesToInstall.length > 0 && !dependencyError) {
-        prettyConsole.print('blue', '', 'Installing necessary dependencies...');
+        prettyConsole.print(
+            'blue',
+            '',
+            'Installing the following required dependencies:',
+        );
+        packagesToInstall.map((package) =>
+            prettyConsole.print(
+                'blue',
+                '',
+                `- ${package.name}@${package.version}`,
+            ),
+        );
 
         const packages = packagesToInstall
             .map((package) => `${package.name}@${package.version}`)
@@ -76,7 +87,7 @@ function installDeps(projectType) {
 
         try {
             execSync(`npm install --save-dev ${packages}`, {
-                stdio: 'ignore',
+                stdio: 'inherit',
             });
         } catch (error) {
             prettyConsole.error(
