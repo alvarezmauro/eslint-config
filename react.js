@@ -2,7 +2,7 @@ const base = require('./rules/base.js');
 const react = require('./rules/react.js');
 
 module.exports = {
-    extends: ['airbnb', 'airbnb/hooks', 'prettier', 'prettier/react'],
+    extends: ['airbnb', 'airbnb/hooks', 'prettier'],
     env: {
         browser: true,
         commonjs: true,
