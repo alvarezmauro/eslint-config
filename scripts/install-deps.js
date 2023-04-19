@@ -69,9 +69,21 @@ async function installDeps(projectType) {
     });
 
     if (packagesToInstall.length > 0 && !dependencyError) {
-        console.log('The following packages are required:');
-        packagesToInstall.map((package) =>
-            console.log(`- ${package.name}@${package.version}`),
+        prettyConsole.print(
+            'blue',
+            '',
+            '----------------------------------------',
+        );
+        prettyConsole.informationTitle = 'The following packages are required:';
+        prettyConsole.info(
+            ...packagesToInstall.map(
+                (package) => `- ${package.name}@${package.version}`,
+            ),
+        );
+        prettyConsole.print(
+            'blue',
+            '',
+            '----------------------------------------',
         );
 
         const { proceedToInstall } = await inquirer.prompt([

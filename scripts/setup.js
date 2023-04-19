@@ -214,9 +214,9 @@ async function selectOptions() {
     }
     setupEslint(selectOptions.esLint, selectOptions.projectType);
 
-    installDeps(selectOptions.projectType);
+    await installDeps(selectOptions.projectType);
 
-    addLintCommand();
+    await addLintCommand();
 }
 
 const result = selectOptions();
