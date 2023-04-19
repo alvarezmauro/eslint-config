@@ -1,4 +1,5 @@
 const { execSync } = require('child_process');
+const inquirer = require('inquirer');
 const semver = require('semver');
 const PrettyConsole = require('../lib/prettyConsole');
 
@@ -31,7 +32,7 @@ const REQUIRED_PACKAGES = {
     ],
 };
 
-function installDeps(projectType) {
+async function installDeps(projectType) {
     const prettyConsole = new PrettyConsole();
     prettyConsole.closeByNewLine = false;
     prettyConsole.useIcons = true;
@@ -68,18 +69,28 @@ function installDeps(projectType) {
     });
 
     if (packagesToInstall.length > 0 && !dependencyError) {
-        prettyConsole.print(
-            'blue',
-            '',
-            'Installing the following required dependencies:',
-        );
+        console.log('The following packages are required:');
         packagesToInstall.map((package) =>
-            prettyConsole.print(
-                'blue',
-                '',
-                `- ${package.name}@${package.version}`,
-            ),
+            console.log(`- ${package.name}@${package.version}`),
         );
+
+        const { proceedToInstall } = await inquirer.prompt([
+            {
+                type: 'list',
+                name: 'proceedToInstall',
+                message: 'Do you want to install them now?',
+                choices: [
+                    { name: 'Yes', value: true },
+                    { name: 'No', value: false },
+                ],
+            },
+        ]);
+
+        if (!proceedToInstall) {
+            return;
+        }
+
+        prettyConsole.print('blue', '', 'Installing required dependencies:');
 
         const packages = packagesToInstall
             .map((package) => `${package.name}@${package.version}`)
