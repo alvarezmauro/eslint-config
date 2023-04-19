@@ -3,10 +3,10 @@ const typescript = require('./rules/typescript.js');
 
 module.exports = {
     extends: [
-        'airbnb-base',
-        'airbnb-typescript/base',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'airbnb-base',
+        'airbnb-typescript/base',
         'prettier',
     ],
     env: {
