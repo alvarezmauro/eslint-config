@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
 
+const PROJECT_PACKAGE_JSON_PATH = path.resolve(process.cwd(), 'package.json');
+
 async function addLintCommand() {
     const { addLintCommand } = await inquirer.prompt([
         {
@@ -19,15 +21,14 @@ async function addLintCommand() {
         return;
     }
 
-    const hostPackageJsonPath = path.resolve(__dirname, '../../package.json');
-    const hostPackageJson = JSON.parse(fs.readFileSync(hostPackageJsonPath));
+    const hostPackageJson = require(PROJECT_PACKAGE_JSON_PATH);
     hostPackageJson.scripts = {
         ...hostPackageJson.scripts,
         lint: 'eslint ./src',
     };
 
     fs.writeFileSync(
-        hostPackageJsonPath,
+        PROJECT_PACKAGE_JSON_PATH,
         JSON.stringify(hostPackageJson, null, 4),
     );
 }
