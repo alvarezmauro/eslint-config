@@ -2,6 +2,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const shell = require('shelljs');
+const path = require('path');
 const PrettyConsole = require('../lib/prettyConsole');
 const setupPrettier = require('./setup-prettier');
 const setupTypescript = require('./setup-typescript');

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const fs = require('fs');
+const path = require('path');
 const PrettyConsole = require('../lib/prettyConsole');
 const ESLINT_CONFIG = require('../.eslintrc.sample.js');
 const BASE_ESLINT_CONFIG = require('../base.js');
