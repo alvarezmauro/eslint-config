@@ -7,8 +7,11 @@ const REACT_ESLINT_CONFIG = require('../react.js');
 const TYPESCRIPT_ESLINT_CONFIG = require('../typescript.js');
 const REACT_TYPESCRIPT_ESLINT_CONFIG = require('../react-typescript.js');
 
-const PROJECT_ESLINT_CONFIG_PATH = `${process.cwd()}/.eslintrc`;
-const PROJECT_ESLINT_SAMPLE_CONFIG_PATH = `${process.cwd()}/.eslintrc.sample`;
+const PROJECT_ESLINT_CONFIG_PATH = path.resolve(process.cwd(), '.eslintrc');
+const PROJECT_ESLINT_SAMPLE_CONFIG_PATH = path.resolve(
+    process.cwd(),
+    '.eslintrc.sample',
+);
 
 /**
  * Function to setup ESlint configuration

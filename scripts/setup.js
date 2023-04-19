@@ -9,14 +9,9 @@ const setupEslint = require('./setup-eslint');
 const installDeps = require('./install-deps');
 const addLintCommand = require('./add-lint-command');
 
-const prettyConsole = new PrettyConsole();
-prettyConsole.clear();
-prettyConsole.closeByNewLine = true;
-prettyConsole.useIcons = true;
-
-const PROJECT_PRETTIER_CONFIG_PATH = `${process.cwd()}/.prettierrc`;
-const PROJECT_TS_CONFIG_PATH = `${process.cwd()}/tsconfig.json`;
-const PROJECT_ESLINT_CONFIG_PATH = `${process.cwd()}/.eslintrc`;
+const PROJECT_PRETTIER_CONFIG_PATH = path.resolve(process.cwd(), '.prettierrc');
+const PROJECT_TS_CONFIG_PATH = path.resolve(process.cwd(), '.tsconfig.json');
+const PROJECT_ESLINT_CONFIG_PATH = path.resolve(process.cwd(), '.eslintrc');
 
 function getTypeScriptConfigChoices() {
     let tsConfigExists;
@@ -140,7 +135,11 @@ async function selectOptions() {
         prettier: '',
     };
 
+    const prettyConsole = new PrettyConsole();
     prettyConsole.clear();
+    prettyConsole.closeByNewLine = true;
+    prettyConsole.useIcons = true;
+
     prettyConsole.print('blue', '', '----------------------------------------');
     prettyConsole.info(
         'This package includes a recommended configuration for Prettier, TypeScript and',

@@ -32,6 +32,11 @@ const REQUIRED_PACKAGES = {
     ],
 };
 
+/**
+ * Function to install the required dependencies
+ *
+ * @param {string} projectType
+ */
 async function installDeps(projectType) {
     const prettyConsole = new PrettyConsole();
     prettyConsole.closeByNewLine = false;

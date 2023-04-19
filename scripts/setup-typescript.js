@@ -2,8 +2,15 @@
 const fs = require('fs');
 const PrettyConsole = require('../lib/prettyConsole');
 const TSCONFIG = require('../tsconfig.json');
-const PROJECT_TYPESCRIPT_CONFIG_PATH = `${process.cwd()}/tsconfig.json`;
-const PROJECT_TYPESCRIPT_SAMPLE_CONFIG_PATH = `${process.cwd()}/.prettierrc.sample`;
+
+const PROJECT_TYPESCRIPT_CONFIG_PATH = path.resolve(
+    process.cwd(),
+    'tsconfig.json',
+);
+const PROJECT_TYPESCRIPT_SAMPLE_CONFIG_PATH = path.resolve(
+    process.cwd(),
+    '.prettierrc.sample',
+);
 
 /**
  * Function to setup TypeScript configuration
