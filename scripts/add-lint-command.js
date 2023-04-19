@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
 
-async function addLintCommands() {
+async function addLintCommand() {
     const { addLintCommand } = await inquirer.prompt([
         {
             type: 'list',
@@ -31,3 +31,5 @@ async function addLintCommands() {
         JSON.stringify(hostPackageJson, null, 4),
     );
 }
+
+module.exports = addLintCommand;
