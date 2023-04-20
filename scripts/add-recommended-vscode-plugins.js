@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
+const PrettyConsole = require('../lib/prettyConsole');
 
 const VSCODE_EXTENSIONS_PATH = path.resolve(
     process.cwd(),
@@ -13,6 +14,10 @@ const REQUIRED_EXTENSIONS = [
 ];
 
 async function addRecommendedVscodePlugins() {
+    const prettyConsole = new PrettyConsole();
+    prettyConsole.closeByNewLine = false;
+    prettyConsole.useIcons = true;
+
     const { addRecommendedVscodePlugins } = await inquirer.prompt([
         {
             type: 'list',
