@@ -40,12 +40,12 @@ async function addRecommendedVscodePlugins() {
         // Check if the recommendations attribute exists and contains the required extensions
         if (
             vscodeExtensions.recommendations &&
-            requiredExtensions.every((ext) =>
+            REQUIRED_EXTENSIONS.every((ext) =>
                 vscodeExtensions.recommendations.includes(ext),
             )
         ) {
             prettyConsole.info(
-                `The ".vscode/extensions.json" file already contains the recommended plugins: ${requiredExtensions.join(
+                `The ".vscode/extensions.json" file already contains the recommended plugins: ${REQUIRED_EXTENSIONS.join(
                     ', ',
                 )}`,
             );
@@ -54,7 +54,7 @@ async function addRecommendedVscodePlugins() {
             if (!vscodeExtensions.recommendations) {
                 vscodeExtensions.recommendations = [];
             }
-            requiredExtensions.forEach((ext) => {
+            REQUIRED_EXTENSIONS.forEach((ext) => {
                 if (!vscodeExtensions.recommendations.includes(ext)) {
                     vscodeExtensions.recommendations.push(ext);
                 }
@@ -67,7 +67,7 @@ async function addRecommendedVscodePlugins() {
             );
 
             prettyConsole.info(
-                `The ".vscode/extensions.json" file has been updated with the following plugins recommendations: ${requiredExtensions.join(
+                `The ".vscode/extensions.json" file has been updated with the following plugins recommendations: ${REQUIRED_EXTENSIONS.join(
                     ', ',
                 )}`,
             );
@@ -75,14 +75,14 @@ async function addRecommendedVscodePlugins() {
     } else {
         // Create a new .vscode/extensions.json file with the plugin recommendations
         const json = {
-            recommendations: requiredExtensions,
+            recommendations: REQUIRED_EXTENSIONS,
             unwantedRecommendations: [],
         };
 
         // Write the JSON object to the file
-        fs.writeFileSync(filepath, JSON.stringify(json, null, 4));
+        fs.writeFileSync(VSCODE_EXTENSIONS_PATH, JSON.stringify(json, null, 4));
         prettyConsole.info(
-            `The ".vscode/extensions.json" file has been created with the following recommendations: ${requiredExtensions.join(
+            `The ".vscode/extensions.json" file has been created with the following recommendations: ${REQUIRED_EXTENSIONS.join(
                 ', ',
             )}`,
         );
