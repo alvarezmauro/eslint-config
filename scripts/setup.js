@@ -9,6 +9,7 @@ const setupTypescript = require('./setup-typescript');
 const setupEslint = require('./setup-eslint');
 const installDeps = require('./install-deps');
 const addLintCommand = require('./add-lint-command');
+const addVsCodeSettings = require('./add-recommended-vscode-plugins');
 
 const PROJECT_PRETTIER_CONFIG_PATH = path.resolve(process.cwd(), '.prettierrc');
 const PROJECT_TS_CONFIG_PATH = path.resolve(process.cwd(), '.tsconfig.json');
@@ -217,6 +218,8 @@ async function selectOptions() {
     await installDeps(selectOptions.projectType);
 
     await addLintCommand();
+
+    await addVsCodeSettings();
 }
 
 const result = selectOptions();
