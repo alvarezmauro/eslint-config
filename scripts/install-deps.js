@@ -44,7 +44,8 @@ async function installDeps(projectType) {
     let dependencyError = false;
     const packagesToInstall = [];
 
-    prettyConsole.print('blue', '', 'Checking dependencies...');
+    console.log('');
+    prettyConsole.print('blue', '', 'Checking installed dependencies...');
     REQUIRED_PACKAGES[projectType].forEach((package) => {
         try {
             // Check if the required package is already installed
@@ -95,7 +96,8 @@ async function installDeps(projectType) {
             {
                 type: 'list',
                 name: 'proceedToInstall',
-                message: 'Do you want to install them now?',
+                message:
+                    'Do you want to install them now? (if you choose no, you will have to install them manually)',
                 choices: [
                     { name: 'Yes', value: true },
                     { name: 'No', value: false },
@@ -106,8 +108,6 @@ async function installDeps(projectType) {
         if (!proceedToInstall) {
             return;
         }
-
-        prettyConsole.print('blue', '', 'Installing required dependencies:');
 
         const packages = packagesToInstall
             .map((package) => `${package.name}@${package.version}`)

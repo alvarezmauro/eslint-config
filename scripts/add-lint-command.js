@@ -5,6 +5,7 @@ const inquirer = require('inquirer');
 const PROJECT_PACKAGE_JSON_PATH = path.resolve(process.cwd(), 'package.json');
 
 async function addLintCommand() {
+    console.log('');
     const { addLintCommand } = await inquirer.prompt([
         {
             type: 'list',
