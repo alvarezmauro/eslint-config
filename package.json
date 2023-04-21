@@ -1,6 +1,6 @@
 {
     "name": "@alvarezmauro/eslint-config",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Eslint and Prettier shareable config",
     "main": "index.js",
     "scripts": {
