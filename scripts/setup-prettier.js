@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const PrettyConsole = require('../lib/prettyConsole');
+const PrettyConsole = require('../lib/PrettyConsole');
 const PRETTIER_CONFIG = require('../.prettierrc.js');
 
 const PROJECT_PRETTIER_CONFIG_PATH = path.resolve(process.cwd(), '.prettierrc');
@@ -20,7 +20,6 @@ function setupPrettier(option) {
     prettyConsole.closeByNewLine = true;
     prettyConsole.useIcons = true;
 
-    let prettierConfigExists = false;
     let projectPrettierConfig = {};
 
     if (option === 'override' || option === 'create') {
@@ -33,7 +32,6 @@ function setupPrettier(option) {
             projectPrettierConfig = JSON.parse(
                 fs.readFileSync(PROJECT_PRETTIER_CONFIG_PATH),
             );
-            prettierConfigExists = true;
         } catch (err) {
             prettyConsole.error('.prettierrc file not found');
             prettyConsole.info('We will create a new one for you');
