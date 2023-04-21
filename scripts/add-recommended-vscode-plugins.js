@@ -13,7 +13,7 @@ const REQUIRED_EXTENSIONS = [
 
 async function addRecommendedVscodePlugins() {
     const prettyConsole = new PrettyConsole();
-    prettyConsole.closeByNewLine = false;
+    prettyConsole.closeByNewLine = true;
     prettyConsole.useIcons = true;
 
     const { addRecommendedVscodePlugins } = await inquirer.prompt([
@@ -48,9 +48,8 @@ async function addRecommendedVscodePlugins() {
             )
         ) {
             prettyConsole.info(
-                `The ".vscode/extensions.json" file already contains the recommended plugins: ${REQUIRED_EXTENSIONS.join(
-                    ', ',
-                )}`,
+                'The ".vscode/extensions.json" file already contains the recommended plugins',
+                ...REQUIRED_EXTENSIONS.map((ext) => `  - ${ext}`),
             );
         } else {
             // Add the required extensions to the recommendations attribute
@@ -67,6 +66,11 @@ async function addRecommendedVscodePlugins() {
             fs.writeFileSync(
                 VSCODE_EXTENSIONS_PATH,
                 JSON.stringify(vscodeExtensions, null, 4),
+            );
+
+            prettyConsole.info(
+                'The ".vscode/extensions.json" file has been updated with the following plugins recommendations:',
+                ...REQUIRED_EXTENSIONS.map((ext) => `  - ${ext}`),
             );
 
             prettyConsole.info(
@@ -89,9 +93,8 @@ async function addRecommendedVscodePlugins() {
         // Write the JSON object to the file
         fs.writeFileSync(VSCODE_EXTENSIONS_PATH, JSON.stringify(json, null, 4));
         prettyConsole.info(
-            `The ".vscode/extensions.json" file has been created with the following recommendations: ${REQUIRED_EXTENSIONS.join(
-                ', ',
-            )}`,
+            'The ".vscode/extensions.json" file has been created with the following recommendations:',
+            ...REQUIRED_EXTENSIONS.map((ext) => `  - ${ext}`),
         );
     }
 }

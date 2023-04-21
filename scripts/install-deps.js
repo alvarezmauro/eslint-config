@@ -41,6 +41,7 @@ async function installDeps(projectType) {
     const prettyConsole = new PrettyConsole();
     prettyConsole.closeByNewLine = false;
     prettyConsole.useIcons = true;
+
     let dependencyError = false;
     const packagesToInstall = [];
 
@@ -97,7 +98,7 @@ async function installDeps(projectType) {
                 type: 'list',
                 name: 'proceedToInstall',
                 message:
-                    'Do you want to install them now? (if you choose no, you will have to install them manually)',
+                    'Do you want to install them now? (if you choose "No", you will have to install them manually)',
                 choices: [
                     { name: 'Yes', value: true },
                     { name: 'No', value: false },
