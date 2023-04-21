@@ -1,10 +1,10 @@
 const fs = require('fs');
-const path = require('path');
 const inquirer = require('inquirer');
 const PrettyConsole = require('../lib/PrettyConsole');
-
-const VSCODE_FOLDER_PATH = path.resolve(process.cwd(), '.vscode');
-const VSCODE_EXTENSIONS_PATH = `${VSCODE_FOLDER_PATH}/extensions.json`;
+const {
+    PROJECT_VSCODE_FOLDER_PATH,
+    PROJECT_VSCODE_EXTENSIONS_PATH,
+} = require('./consts');
 
 const REQUIRED_EXTENSIONS = [
     'esbenp.prettier-vscode',
@@ -33,11 +33,11 @@ async function addRecommendedVscodePlugins() {
         return;
     }
 
-    // Check if the extensions.json file exists
-    if (fs.existsSync(VSCODE_EXTENSIONS_PATH)) {
+    // Check if the .vscode/extensions.json file exists
+    if (fs.existsSync(PROJECT_VSCODE_EXTENSIONS_PATH)) {
         // Read the file and parse its contents as JSON
         const vscodeExtensions = JSON.parse(
-            fs.readFileSync(VSCODE_EXTENSIONS_PATH, 'utf8'),
+            fs.readFileSync(PROJECT_VSCODE_EXTENSIONS_PATH, 'utf8'),
         );
 
         // Check if the recommendations attribute exists and contains the required extensions
@@ -64,7 +64,7 @@ async function addRecommendedVscodePlugins() {
 
             // Write the updated JSON object back to the file
             fs.writeFileSync(
-                VSCODE_EXTENSIONS_PATH,
+                PROJECT_VSCODE_EXTENSIONS_PATH,
                 JSON.stringify(vscodeExtensions, null, 4),
             );
 
@@ -86,12 +86,15 @@ async function addRecommendedVscodePlugins() {
             unwantedRecommendations: [],
         };
 
-        if (!fs.existsSync(VSCODE_FOLDER_PATH)) {
-            fs.mkdirSync(VSCODE_FOLDER_PATH);
+        if (!fs.existsSync(PROJECT_VSCODE_FOLDER_PATH)) {
+            fs.mkdirSync(PROJECT_VSCODE_FOLDER_PATH);
         }
 
         // Write the JSON object to the file
-        fs.writeFileSync(VSCODE_EXTENSIONS_PATH, JSON.stringify(json, null, 4));
+        fs.writeFileSync(
+            PROJECT_VSCODE_EXTENSIONS_PATH,
+            JSON.stringify(json, null, 4),
+        );
         prettyConsole.info(
             'The ".vscode/extensions.json" file has been created with the following recommendations:',
             ...REQUIRED_EXTENSIONS.map((ext) => `  - ${ext}`),

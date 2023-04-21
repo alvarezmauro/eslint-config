@@ -1,23 +1,25 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const inquirer = require('inquirer');
-const path = require('path');
 const PrettyConsole = require('../lib/PrettyConsole');
 const setupPrettier = require('./setup-prettier');
 const setupTypescript = require('./setup-typescript');
 const setupEslint = require('./setup-eslint');
 const installDeps = require('./install-deps');
-const addLintCommand = require('./add-lint-command');
-const addVsCodeSettings = require('./add-recommended-vscode-plugins');
+const setupLintCommand = require('./setup-lint-command');
+const setupVsCodePlugins = require('./setup-recommended-vscode-plugins');
+const setupVsCodeSettings = require('./setup-vscode-settings');
 
-const PROJECT_PRETTIER_CONFIG_PATH = path.resolve(process.cwd(), '.prettierrc');
-const PROJECT_TS_CONFIG_PATH = path.resolve(process.cwd(), '.tsconfig.json');
-const PROJECT_ESLINT_CONFIG_PATH = path.resolve(process.cwd(), '.eslintrc');
+const {
+    PROJECT_PRETTIER_CONFIG_PATH,
+    PROJECT_TYPESCRIPT_CONFIG_PATH,
+    PROJECT_ESLINT_CONFIG_PATH,
+} = require('./consts');
 
 function getTypeScriptConfigChoices() {
     let tsConfigExists;
     try {
-        fs.readFileSync(PROJECT_TS_CONFIG_PATH);
+        fs.readFileSync(PROJECT_TYPESCRIPT_CONFIG_PATH);
         tsConfigExists = true;
     } catch (err) {
         tsConfigExists = false;
@@ -214,17 +216,16 @@ async function setup() {
     ]);
     selectOptions.esLint = esLintSelectedOption;
 
+    // Setup scripts
     setupPrettier(selectOptions.prettier);
     if (selectOptions.typeScript) {
         setupTypescript(selectOptions.typeScript);
     }
     setupEslint(selectOptions.esLint, selectOptions.projectType);
-
     await installDeps(selectOptions.projectType);
-
-    await addLintCommand();
-
-    await addVsCodeSettings();
+    await setupLintCommand();
+    await setupVsCodePlugins();
+    await setupVsCodeSettings();
 }
 
-module.exports = setup;
+setup();

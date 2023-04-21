@@ -1,8 +1,8 @@
+/* eslint-disable no-console */
 const fs = require('fs');
-const path = require('path');
 const inquirer = require('inquirer');
 
-const PROJECT_PACKAGE_JSON_PATH = path.resolve(process.cwd(), 'package.json');
+const { PROJECT_PACKAGE_JSON_PATH, PROJECT_PACKAGE_JSON } = require('./consts');
 
 async function addLintCommand() {
     console.log('');
@@ -23,15 +23,14 @@ async function addLintCommand() {
         return;
     }
 
-    const hostPackageJson = require(PROJECT_PACKAGE_JSON_PATH);
-    hostPackageJson.scripts = {
-        ...hostPackageJson.scripts,
+    PROJECT_PACKAGE_JSON.scripts = {
+        ...PROJECT_PACKAGE_JSON.scripts,
         lint: 'eslint ./src',
     };
 
     fs.writeFileSync(
         PROJECT_PACKAGE_JSON_PATH,
-        JSON.stringify(hostPackageJson, null, 4),
+        JSON.stringify(PROJECT_PACKAGE_JSON, null, 4),
     );
 }
 

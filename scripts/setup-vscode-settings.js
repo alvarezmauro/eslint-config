@@ -1,10 +1,11 @@
 const fs = require('fs');
-const path = require('path');
 const inquirer = require('inquirer');
 const PrettyConsole = require('../lib/PrettyConsole');
 
-const VSCODE_FOLDER_PATH = path.resolve(process.cwd(), '.vscode');
-const VSCODE_SETTINGS_PATH = `${VSCODE_FOLDER_PATH}/settings.json`;
+const {
+    PROJECT_VSCODE_FOLDER_PATH,
+    PROJECT_VSCODE_SETTINGS_PATH,
+} = require('./consts');
 
 const RECOMMENDED_SETTINGS = {
     'files.eol': '\n',
@@ -45,10 +46,10 @@ async function addRecommendedVscodeSettings() {
     }
 
     // Check if the .vscode/settings.json file exists
-    if (fs.existsSync(VSCODE_SETTINGS_PATH)) {
+    if (fs.existsSync(PROJECT_VSCODE_SETTINGS_PATH)) {
         // Read the file and parse its contents as JSON
         const vscodeSettings = JSON.parse(
-            fs.readFileSync(VSCODE_SETTINGS_PATH, 'utf8'),
+            fs.readFileSync(PROJECT_VSCODE_SETTINGS_PATH, 'utf8'),
         );
 
         // Merge the existing settings with the recommended settings
@@ -59,7 +60,7 @@ async function addRecommendedVscodeSettings() {
 
         // Write the JSON object to the file
         fs.writeFileSync(
-            VSCODE_SETTINGS_PATH,
+            PROJECT_VSCODE_SETTINGS_PATH,
             JSON.stringify(mergedSettings, null, 4),
         );
         prettyConsole.info(
@@ -67,13 +68,13 @@ async function addRecommendedVscodeSettings() {
         );
     } else {
         // Create a new .vscode/settings.json file with the recommended settings
-        if (!fs.existsSync(VSCODE_FOLDER_PATH)) {
-            fs.mkdirSync(VSCODE_FOLDER_PATH);
+        if (!fs.existsSync(PROJECT_VSCODE_FOLDER_PATH)) {
+            fs.mkdirSync(PROJECT_VSCODE_FOLDER_PATH);
         }
 
         // Write the JSON object to the file
         fs.writeFileSync(
-            VSCODE_SETTINGS_PATH,
+            PROJECT_VSCODE_SETTINGS_PATH,
             JSON.stringify(RECOMMENDED_SETTINGS, null, 4),
         );
         prettyConsole.info(

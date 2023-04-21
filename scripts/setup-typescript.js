@@ -1,17 +1,10 @@
-#!/usr/bin/env node
 const fs = require('fs');
-const path = require('path');
+const {
+    TYPESCRIPT_CONFIG,
+    PROJECT_TYPESCRIPT_CONFIG_PATH,
+    PROJECT_TYPESCRIPT_SAMPLE_CONFIG_PATH,
+} = require('./consts');
 const PrettyConsole = require('../lib/PrettyConsole');
-const TSCONFIG = require('../tsconfig.json');
-
-const PROJECT_TYPESCRIPT_CONFIG_PATH = path.resolve(
-    process.cwd(),
-    'tsconfig.json',
-);
-const PROJECT_TYPESCRIPT_SAMPLE_CONFIG_PATH = path.resolve(
-    process.cwd(),
-    '.prettierrc.sample',
-);
 
 /**
  * Function to setup TypeScript configuration
@@ -28,7 +21,7 @@ function updateTsconfig(option) {
     if (option === 'override' || option === 'create') {
         fs.writeFileSync(
             PROJECT_TYPESCRIPT_CONFIG_PATH,
-            JSON.stringify(TSCONFIG, null, 4),
+            JSON.stringify(TYPESCRIPT_CONFIG, null, 4),
         );
     } else if (option === 'merge') {
         try {
@@ -41,7 +34,7 @@ function updateTsconfig(option) {
         }
 
         const mergedTsConfig = {
-            ...TSCONFIG,
+            ...TYPESCRIPT_CONFIG,
             ...projectTsConfig,
         };
 
@@ -52,7 +45,7 @@ function updateTsconfig(option) {
     } else if (option === 'sample') {
         fs.writeFileSync(
             PROJECT_TYPESCRIPT_SAMPLE_CONFIG_PATH,
-            JSON.stringify(TSCONFIG, null, 4),
+            JSON.stringify(TYPESCRIPT_CONFIG, null, 4),
         );
     }
 }

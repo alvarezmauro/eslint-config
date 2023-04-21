@@ -1,14 +1,10 @@
-#!/usr/bin/env node
 const fs = require('fs');
-const path = require('path');
 const PrettyConsole = require('../lib/PrettyConsole');
-const PRETTIER_CONFIG = require('../.prettierrc.js');
-
-const PROJECT_PRETTIER_CONFIG_PATH = path.resolve(process.cwd(), '.prettierrc');
-const PROJECT_PRETTIER_SAMPLE_CONFIG_PATH = path.resolve(
-    process.cwd(),
-    '.prettierrc.sample',
-);
+const {
+    PRETTIER_CONFIG,
+    PROJECT_PRETTIER_CONFIG_PATH,
+    PROJECT_PRETTIER_SAMPLE_CONFIG_PATH,
+} = require('./consts');
 
 /**
  * Function to setup prettier configuration

@@ -1,28 +1,30 @@
+/* eslint-disable no-console */
 const { execSync } = require('child_process');
 const inquirer = require('inquirer');
 const semver = require('semver');
-const PrettyConsole = require('../lib/prettyConsole');
+const PrettyConsole = require('../lib/PrettyConsole');
+const { PROJECT_PACKAGE_JSON } = require('./consts');
 
 const REQUIRED_PACKAGES = {
-    ['js']: [
+    js: [
         { name: 'eslint-config-airbnb-base', version: '^15.0.0' },
         { name: '@babel/eslint-parser', version: '^7.21.3' },
         { name: '@babel/preset-env', version: '^7.21.4' },
     ],
-    ['js-ts']: [
+    'js-ts': [
         { name: 'eslint-config-airbnb-base', version: '^15.0.0' },
         { name: 'eslint-config-airbnb-typescript', version: '^17.0.0' },
         { name: '@typescript-eslint/eslint-plugin', version: '^5.58.0' },
         { name: '@typescript-eslint/parser', version: '^5.58.0' },
     ],
-    ['react']: [
+    react: [
         { name: 'eslint-config-airbnb', version: '^19.0.4' },
         { name: '@babel/eslint-parser', version: '^7.21.3' },
         { name: '@babel/preset-react', version: '^7.18.6' },
         { name: 'eslint-plugin-react', version: '^7.32.2' },
         { name: 'eslint-plugin-react-hooks', version: '^4.6.0' },
     ],
-    ['react-ts']: [
+    'react-ts': [
         { name: 'eslint-config-airbnb', version: '^19.0.4' },
         { name: 'eslint-config-airbnb-typescript', version: '^17.0.0' },
         { name: '@typescript-eslint/eslint-plugin', version: '^5.58.0' },
@@ -47,13 +49,13 @@ async function installDeps(projectType) {
 
     console.log('');
     prettyConsole.print('blue', '', 'Checking installed dependencies...');
-    REQUIRED_PACKAGES[projectType].forEach((package) => {
+    REQUIRED_PACKAGES[projectType].forEach((requiredPackage) => {
         try {
             // Check if the required package is already installed
-            require.resolve(package.name);
+            requiredPackage.resolve(requiredPackage.name);
             // Check if the installed version is compatible
-            const packageJson = require(`${process.cwd()}/package.json`);
-            const installedVersion = packageJson.devDependencies[package.name];
+            let installedVersion =
+                PROJECT_PACKAGE_JSON.devDependencies[requiredPackage.name];
 
             if (installedVersion && installedVersion.startsWith('^')) {
                 // Remove the ^ character from the installed version
@@ -62,16 +64,16 @@ async function installDeps(projectType) {
 
             if (
                 !installedVersion ||
-                !semver.satisfies(installedVersion, package.version)
+                !semver.satisfies(installedVersion, requiredPackage.version)
             ) {
                 // The installed version is incompatible, so log an error
                 prettyConsole.error(
-                    `The installed version of ${package.name} (${installedVersion}) is not compatible with ${package.version}, please update it manually.`,
+                    `The installed version of ${requiredPackage.name} (${installedVersion}) is not compatible with ${requiredPackage.version}, please update it manually.`,
                 );
                 dependencyError = true;
             }
         } catch (error) {
-            packagesToInstall.push(package);
+            packagesToInstall.push(requiredPackage);
         }
     });
 
@@ -84,7 +86,8 @@ async function installDeps(projectType) {
         prettyConsole.informationTitle = 'The following packages are required:';
         prettyConsole.info(
             ...packagesToInstall.map(
-                (package) => `- ${package.name}@${package.version}`,
+                (packageToInstall) =>
+                    `- ${packageToInstall.name}@${packageToInstall.version}`,
             ),
         );
         prettyConsole.print(
@@ -111,7 +114,10 @@ async function installDeps(projectType) {
         }
 
         const packages = packagesToInstall
-            .map((package) => `${package.name}@${package.version}`)
+            .map(
+                (packageToInstall) =>
+                    `${packageToInstall.name}@${packageToInstall.version}`,
+            )
             .join(' ');
 
         try {

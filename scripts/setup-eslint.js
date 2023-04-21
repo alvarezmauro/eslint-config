@@ -1,18 +1,16 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const path = require('path');
-const PrettyConsole = require('../lib/PrettyConsole');
-const ESLINT_CONFIG = require('../.eslintrc.sample.js');
-const BASE_ESLINT_CONFIG = require('../base.js');
-const REACT_ESLINT_CONFIG = require('../react.js');
-const TYPESCRIPT_ESLINT_CONFIG = require('../typescript.js');
-const REACT_TYPESCRIPT_ESLINT_CONFIG = require('../react-typescript.js');
+const {
+    PROJECT_ESLINT_CONFIG_PATH,
+    PROJECT_ESLINT_SAMPLE_CONFIG_PATH,
+    ESLINT_CONFIG,
+    BASE_ESLINT_CONFIG,
+    REACT_ESLINT_CONFIG,
+    TYPESCRIPT_ESLINT_CONFIG,
+    REACT_TYPESCRIPT_ESLINT_CONFIG,
+} = require('./consts');
 
-const PROJECT_ESLINT_CONFIG_PATH = path.resolve(process.cwd(), '.eslintrc');
-const PROJECT_ESLINT_SAMPLE_CONFIG_PATH = path.resolve(
-    process.cwd(),
-    '.eslintrc.sample',
-);
+const PrettyConsole = require('../lib/PrettyConsole');
 
 /**
  * Function to setup ESlint configuration
