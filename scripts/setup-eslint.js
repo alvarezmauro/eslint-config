@@ -64,8 +64,8 @@ function setupEslint(option, projectType) {
             );
             eslintConfigExists = true;
         } catch (err) {
-            prettyConsole.error('.eslintrc file not found');
-            prettyConsole.info('We will create a new one for you');
+            prettyConsole.print('red', '', '.eslintrc file not found');
+            prettyConsole.print('blue', '', 'We will create a new one for you');
         }
 
         if (eslintConfigExists) {

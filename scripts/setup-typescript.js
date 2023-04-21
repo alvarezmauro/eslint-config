@@ -29,8 +29,8 @@ function updateTsconfig(option) {
                 fs.readFileSync(PROJECT_TYPESCRIPT_CONFIG_PATH),
             );
         } catch (err) {
-            prettyConsole.error('tsconfig.json file not found');
-            prettyConsole.info('We will create a new one for you');
+            prettyConsole.print('red', '', 'tsconfig.json file not found');
+            prettyConsole.print('blue', '', 'We will create a new one for you');
         }
 
         const mergedTsConfig = {

@@ -67,8 +67,11 @@ async function installDeps(projectType) {
                 !semver.satisfies(installedVersion, requiredPackage.version)
             ) {
                 // The installed version is incompatible, so log an error
-                const errorMessage = `The installed version of ${requiredPackage.name} (${installedVersion}) is not compatible with ${requiredPackage.version}, please update it manually.`;
-                prettyConsole.error(errorMessage);
+                prettyConsole.print(
+                    'red',
+                    '',
+                    `The installed version of ${requiredPackage.name} (${installedVersion}) is not compatible with ${requiredPackage.version}, please update it manually.`,
+                );
                 dependencyError = true;
             }
         } catch (error) {
@@ -123,9 +126,11 @@ async function installDeps(projectType) {
                 stdio: 'inherit',
             });
         } catch (error) {
-            const errorMessage =
-                'There was an error installing the dependencies, please install them manually.';
-            prettyConsole.error(errorMessage);
+            prettyConsole.print(
+                'red',
+                '',
+                'There was an error installing the dependencies, please install them manually.',
+            );
             dependencyError = true;
         }
     }

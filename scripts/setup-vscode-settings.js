@@ -63,9 +63,12 @@ async function addRecommendedVscodeSettings() {
             PROJECT_VSCODE_SETTINGS_PATH,
             JSON.stringify(mergedSettings, null, 4),
         );
-        const infoMessage =
-            'The ".vscode/settings.json" file has been updated with the recommended settings.';
-        prettyConsole.info(infoMessage);
+
+        prettyConsole.print(
+            'blue',
+            '',
+            'The ".vscode/settings.json" file has been updated with the recommended settings.',
+        );
     } else {
         // Create a new .vscode/settings.json file with the recommended settings
         if (!fs.existsSync(PROJECT_VSCODE_FOLDER_PATH)) {
@@ -77,9 +80,12 @@ async function addRecommendedVscodeSettings() {
             PROJECT_VSCODE_SETTINGS_PATH,
             JSON.stringify(RECOMMENDED_SETTINGS, null, 4),
         );
-        const infoMessage =
-            'The ".vscode/settings.json" file has been created with the recommended settings.';
-        prettyConsole.info(infoMessage);
+
+        prettyConsole.print(
+            'blue',
+            '',
+            'The ".vscode/settings.json" file has been created with the recommended settings.',
+        );
     }
 }
 

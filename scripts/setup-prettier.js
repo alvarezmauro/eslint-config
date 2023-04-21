@@ -29,8 +29,8 @@ function setupPrettier(option) {
                 fs.readFileSync(PROJECT_PRETTIER_CONFIG_PATH),
             );
         } catch (err) {
-            prettyConsole.error('.prettierrc file not found');
-            prettyConsole.info('We will create a new one for you');
+            prettyConsole.print('red', '', '.prettierrc file not found');
+            prettyConsole.print('blue', '', 'We will create a new one for you');
         }
 
         const mergedPrettierConfig = {
