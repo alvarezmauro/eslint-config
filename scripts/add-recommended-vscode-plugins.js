@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
-const PrettyConsole = require('../lib/prettyConsole');
+const PrettyConsole = require('../lib/PrettyConsole');
 
 const VSCODE_FOLDER_PATH = path.resolve(process.cwd(), '.vscode');
 const VSCODE_EXTENSIONS_PATH = `${VSCODE_FOLDER_PATH}/extensions.json`;
