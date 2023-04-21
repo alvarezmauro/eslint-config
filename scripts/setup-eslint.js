@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const PrettyConsole = require('../lib/prettyConsole');
+const PrettyConsole = require('../lib/PrettyConsole');
 const ESLINT_CONFIG = require('../.eslintrc.sample.js');
 const BASE_ESLINT_CONFIG = require('../base.js');
 const REACT_ESLINT_CONFIG = require('../react.js');
@@ -66,15 +66,20 @@ function setupEslint(option, projectType) {
             );
             eslintConfigExists = true;
         } catch (err) {
-            prettyConsole.error('.prettierrc file not found');
+            prettyConsole.error('.eslintrc file not found');
             prettyConsole.info('We will create a new one for you');
         }
 
         if (eslintConfigExists) {
+            /**
+             * Check if any of the extend values from CONFIG.extends and EXTENDS are
+             * already in the project's .eslintrc file. If so, remove them from the
+             * "extendsValue" array to avoid duplicates.
+             * */
             const extendsToFilter = [...CONFIG.extends, EXTENDS];
-            extendsValue = projectEslintConfig.extends.filter((value) => {
-                return extendsToFilter.indexOf(value) === -1;
-            });
+            extendsValue = projectEslintConfig.extends.filter(
+                (value) => extendsToFilter.indexOf(value) === -1,
+            );
         }
 
         extendsValue.unshift(EXTENDS);
@@ -93,7 +98,7 @@ function setupEslint(option, projectType) {
         ESLINT_CONFIG.extends = [EXTENDS];
         fs.writeFileSync(
             PROJECT_ESLINT_SAMPLE_CONFIG_PATH,
-            JSON.stringify(ESLINT_CONFIG, _PATH.js, 4),
+            JSON.stringify(ESLINT_CONFIG, null, 4),
         );
     }
 }
