@@ -93,10 +93,10 @@ async function installDeps(projectType) {
             '----------------------------------------',
         );
 
-        const { proceedToInstall } = await inquirer.prompt([
+        const { installDepsPromptValue } = await inquirer.prompt([
             {
                 type: 'list',
-                name: 'proceedToInstall',
+                name: 'installDepsPromptValue',
                 message:
                     'Do you want to install them now? (if you choose "No", you will have to install them manually)',
                 choices: [
@@ -106,7 +106,7 @@ async function installDeps(projectType) {
             },
         ]);
 
-        if (!proceedToInstall) {
+        if (!installDepsPromptValue) {
             return;
         }
 

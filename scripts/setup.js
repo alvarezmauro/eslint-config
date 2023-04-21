@@ -144,25 +144,28 @@ async function selectOptions() {
 
     prettyConsole.print('blue', '', '----------------------------------------');
     prettyConsole.info(
-        'This package includes a recommended configuration for Prettier, TypeScript and',
-        'ESLint based on the type of project your are planning to work on.',
-        'It also includes a recommended set of dependencies to install.',
+        'This package will help you to setup Prettier, ESLint and TypeScript',
+        'based on the type of project you choose from a list (JS, JS+TS, React, React+TS).',
         '',
-        'Answer the following questions to setup/update your ESLint and Prettier preferences.',
+        'It will also help you to:',
+        '- Install the required dependencies for ESLint, Prettier and TypeScript.',
+        '- Add a "lint" command to your package.json.',
+        '- Add recommended VSCode plugins to your workspace settings.',
+        '- Add recommended VSCode settings for ESLint and Prettier to your workspace.',
         '',
         'Have in mind that:',
-        '- If you do not have any configuration files, we will create them for you.',
-        '- If you have existing configuration files, we will ask you if you want to override',
-        '  them or merge them with our recommended configuration.',
+        `- If you don't have any of the required configuration files, we will create them for you.`,
+        '- If you already have any of the required configuration files, we will ask you if',
+        '   you want to override them or merge them with our recommended configuration.',
         '- If you want to keep your existing configuration files, you can save our recommended',
         '  configuration in a separate file.',
     );
     prettyConsole.print('blue', '', '----------------------------------------');
 
-    const { projectType } = await inquirer.prompt([
+    const { projectTypePromptValue } = await inquirer.prompt([
         {
             type: 'list',
-            name: 'projectType',
+            name: 'projectTypePromptValue',
             message: 'What type of project would you like to set up?',
             choices: [
                 { name: 'Javascript', value: 'js' },
@@ -172,7 +175,7 @@ async function selectOptions() {
             ],
         },
     ]);
-    selectOptions.projectType = projectType;
+    selectOptions.projectType = projectTypePromptValue;
 
     // Prettier config
     const { prettierSelectedOption } = await inquirer.prompt([
@@ -186,7 +189,10 @@ async function selectOptions() {
     selectOptions.prettier = prettierSelectedOption;
 
     // Typescript config
-    if (projectType === 'js-ts' || projectType === 'react-ts') {
+    if (
+        projectTypePromptValue === 'js-ts' ||
+        projectTypePromptValue === 'react-ts'
+    ) {
         const { typeScriptSelectedOption } = await inquirer.prompt([
             {
                 type: 'list',

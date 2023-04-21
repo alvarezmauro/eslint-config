@@ -16,10 +16,10 @@ async function addRecommendedVscodePlugins() {
     prettyConsole.closeByNewLine = true;
     prettyConsole.useIcons = true;
 
-    const { addRecommendedVscodePlugins } = await inquirer.prompt([
+    const { addRecommendedVscodePluginsPromptValue } = await inquirer.prompt([
         {
             type: 'list',
-            name: 'addRecommendedVscodePlugins',
+            name: 'addRecommendedVscodePluginsPromptValue',
             message:
                 'Do you want to add recommended VSCode plugins to your project .vscode/extensions.json?',
             choices: [
@@ -29,7 +29,7 @@ async function addRecommendedVscodePlugins() {
         },
     ]);
 
-    if (!addRecommendedVscodePlugins) {
+    if (!addRecommendedVscodePluginsPromptValue) {
         return;
     }
 

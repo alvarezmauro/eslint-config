@@ -6,11 +6,12 @@ const PROJECT_PACKAGE_JSON_PATH = path.resolve(process.cwd(), 'package.json');
 
 async function addLintCommand() {
     console.log('');
-    const { addLintCommand } = await inquirer.prompt([
+    const { addLintCommandPromptValue } = await inquirer.prompt([
         {
             type: 'list',
-            name: 'addLintCommand',
-            message: 'Do you want to add a lint command to your package.json?',
+            name: 'addLintCommandPromptValue',
+            message:
+                'Do you want to add a "lint" command to your package.json?',
             choices: [
                 { name: 'Yes', value: true },
                 { name: 'No', value: false },
@@ -18,7 +19,7 @@ async function addLintCommand() {
         },
     ]);
 
-    if (!addLintCommand) {
+    if (!addLintCommandPromptValue) {
         return;
     }
 
