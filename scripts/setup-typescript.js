@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const PrettyConsole = require('../lib/prettyConsole');
+const PrettyConsole = require('../lib/PrettyConsole');
 const TSCONFIG = require('../tsconfig.json');
 
 const PROJECT_TYPESCRIPT_CONFIG_PATH = path.resolve(
@@ -23,7 +23,6 @@ function updateTsconfig(option) {
     prettyConsole.closeByNewLine = true;
     prettyConsole.useIcons = true;
 
-    let tsConfigExists = false;
     let projectTsConfig = {};
 
     if (option === 'override' || option === 'create') {
@@ -36,7 +35,6 @@ function updateTsconfig(option) {
             projectTsConfig = JSON.parse(
                 fs.readFileSync(PROJECT_TYPESCRIPT_CONFIG_PATH),
             );
-            tsConfigExists = true;
         } catch (err) {
             prettyConsole.error('tsconfig.json file not found');
             prettyConsole.info('We will create a new one for you');
