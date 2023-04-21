@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const inquirer = require('inquirer');
-const shell = require('shelljs');
 const path = require('path');
-const PrettyConsole = require('../lib/prettyConsole');
+const PrettyConsole = require('../lib/PrettyConsole');
 const setupPrettier = require('./setup-prettier');
 const setupTypescript = require('./setup-typescript');
 const setupEslint = require('./setup-eslint');
@@ -129,7 +128,7 @@ function getEsLintChoices() {
     ];
 }
 
-async function selectOptions() {
+async function setup() {
     const selectOptions = {
         projectType: '',
         typeScript: '',
@@ -228,4 +227,4 @@ async function selectOptions() {
     await addVsCodeSettings();
 }
 
-const result = selectOptions();
+module.exports = setup;
