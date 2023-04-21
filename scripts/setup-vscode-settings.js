@@ -33,7 +33,7 @@ async function addRecommendedVscodeSettings() {
             type: 'list',
             name: 'addRecommendedVscodeSettingsPromptValue',
             message:
-                'Do you want to add recommended VSCode settings for esLint and Prettier to your project ".vscode/settings.json?"',
+                'Do you want to add the recommended VSCode settings for ESLint and Prettier to your project ".vscode/settings.json?"',
             choices: [
                 { name: 'Yes', value: true },
                 { name: 'No', value: false },
@@ -63,9 +63,9 @@ async function addRecommendedVscodeSettings() {
             PROJECT_VSCODE_SETTINGS_PATH,
             JSON.stringify(mergedSettings, null, 4),
         );
-        prettyConsole.info(
-            'The ".vscode/settings.json" file has been updated with the recommended settings.',
-        );
+        const infoMessage =
+            'The ".vscode/settings.json" file has been updated with the recommended settings.';
+        prettyConsole.info(infoMessage);
     } else {
         // Create a new .vscode/settings.json file with the recommended settings
         if (!fs.existsSync(PROJECT_VSCODE_FOLDER_PATH)) {
@@ -77,9 +77,9 @@ async function addRecommendedVscodeSettings() {
             PROJECT_VSCODE_SETTINGS_PATH,
             JSON.stringify(RECOMMENDED_SETTINGS, null, 4),
         );
-        prettyConsole.info(
-            'The ".vscode/settings.json" file has been created with the recommended settings.',
-        );
+        const infoMessage =
+            'The ".vscode/settings.json" file has been created with the recommended settings.';
+        prettyConsole.info(infoMessage);
     }
 }
 

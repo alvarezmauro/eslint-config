@@ -72,12 +72,6 @@ async function addRecommendedVscodePlugins() {
                 'The ".vscode/extensions.json" file has been updated with the following plugins recommendations:',
                 ...REQUIRED_EXTENSIONS.map((ext) => `  - ${ext}`),
             );
-
-            prettyConsole.info(
-                `The ".vscode/extensions.json" file has been updated with the following plugins recommendations: ${REQUIRED_EXTENSIONS.join(
-                    ', ',
-                )}`,
-            );
         }
     } else {
         // Create a new .vscode/extensions.json file with the plugin recommendations
