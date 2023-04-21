@@ -32,13 +32,9 @@ const PROJECT_VSCODE_FOLDER_PATH = path.resolve(process.cwd(), '.vscode');
 const PROJECT_VSCODE_EXTENSIONS_PATH = `${PROJECT_VSCODE_FOLDER_PATH}/extensions.json`;
 const PROJECT_VSCODE_SETTINGS_PATH = `${PROJECT_VSCODE_FOLDER_PATH}/settings.json`;
 
-const PRETTIER_CONFIG = JSON.parse(fs.readFileSync('../.prettierrc', 'utf8'));
-const TYPESCRIPT_CONFIG = JSON.parse(
-    fs.readFileSync('../tsconfig.json', 'utf8'),
-);
-const ESLINT_CONFIG = JSON.parse(
-    fs.readFileSync('../.eslintrc.sample', 'utf8'),
-);
+const PRETTIER_CONFIG = require('../.prettierrc.json');
+const TYPESCRIPT_CONFIG = require('../tsconfig.json');
+const ESLINT_CONFIG = require('../.eslintrc.sample.json');
 
 module.exports = {
     BASE_ESLINT_CONFIG,
