@@ -19,9 +19,9 @@ node ./node_modules/@alvarezmauro/eslint-config/scripts/setup.js
 
 ## Usage ##
 Once you execute the `setup` command you just need to follow the prompt.
+![Installing @alvarezmauro/eslint-config + peerdependencies](./assets/setup-script.gif)
 
-
-Features
+## Features ##
 - Installs required dependencies for ESLint, Prettier, and TypeScript
 - Adds a "lint" command to your package.json
 - Adds recommended VSCode plugins to your workspace settings
